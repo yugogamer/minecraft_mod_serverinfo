@@ -25,6 +25,7 @@ public class Server {
             System.out.println("HTTP server error");
         }
         server.createContext("/status", new Status(this.minecraftServer));
+        server.createContext("/playerlist", new Status(this.minecraftServer));
         server.start();
     }
 }
