@@ -7,7 +7,7 @@ import net.minecraft.server.MinecraftServer;
 import java.io.IOException;
 
 public class MinecraftHandler implements HttpHandler {
-    private MinecraftServer minecraftServer;
+    protected MinecraftServer minecraftServer;
 
     public MinecraftHandler(MinecraftServer minecraftServer) {
         this.minecraftServer = minecraftServer;
