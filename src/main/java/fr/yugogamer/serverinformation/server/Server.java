@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import fr.yugogamer.serverinformation.server.handler.MinecraftHandler;
+import fr.yugogamer.serverinformation.server.handler.PlayerList;
 import fr.yugogamer.serverinformation.server.handler.Status;
 import net.minecraft.server.MinecraftServer;
 
@@ -25,7 +26,7 @@ public class Server {
             System.out.println("HTTP server error");
         }
         server.createContext("/status", new Status(this.minecraftServer));
-        server.createContext("/playerlist", new Status(this.minecraftServer));
+        server.createContext("/playerlist", new PlayerList(this.minecraftServer));
         server.start();
     }
 }
