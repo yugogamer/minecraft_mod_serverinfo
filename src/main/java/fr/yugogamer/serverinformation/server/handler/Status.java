@@ -24,12 +24,10 @@ public class Status extends MinecraftHandler {
         response.addProperty("modded",this.minecraftServer.getServerConfiguration().isModded());
         response.addProperty("hardcore", this.minecraftServer.getServerConfiguration().isHardcore());
         response.addProperty("gametype",this.minecraftServer.getServerConfiguration().getGameType().getName());
-        response.addProperty("pvp",this.minecraftServer.isPVPEnabled());    
+        response.addProperty("pvp",this.minecraftServer.isPVPEnabled());
         String sendToClient = response.toString();
         httpExchange.sendResponseHeaders(200, sendToClient.length());
         OutputStream os = httpExchange.getResponseBody();
-        os.write(sendToClient.getBytes());
-        os.write(sendToClient.getBytes());
         os.write(sendToClient.getBytes());
         os.close();
     }
