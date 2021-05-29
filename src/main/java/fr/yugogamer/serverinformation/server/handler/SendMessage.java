@@ -28,9 +28,19 @@ public class SendMessage extends MinecraftHandler {
             litPlayer = this.minecraftServer.func_241755_D_().getPlayers();
             String message = querys.get("username") + " : " + querys.get("message");
             for (ServerPlayerEntity playerEntity : litPlayer) {
-                playerEntity.sendMessage(new StringTextComponent(message), UUID.randomUUID());
+                if (querys.get("player") != null)
+                {
+                    if (playerEntity.getDisplayName().getString().equals(querys.get("player")))
+                    {
+                        playerEntity.sendMessage(new StringTextComponent(message), UUID.randomUUID());
+                        response.addProperty("status","succes");
+                        response.addProperty("playerGetMessage",true);
+                    }
+                }else
+                {
+                    playerEntity.sendMessage(new StringTextComponent(message), UUID.randomUUID());
+                }
             }
-            response.addProperty("status","succes");
         }else
         {
             response.addProperty("status","error");
