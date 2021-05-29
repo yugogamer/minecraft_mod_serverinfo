@@ -1,5 +1,6 @@
 package fr.yugogamer.serverinformation;
 
+import fr.yugogamer.serverinformation.server.Server;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -72,6 +73,7 @@ public class ServerInformation {
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
+        Server server = new Server(event.getServer());
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
