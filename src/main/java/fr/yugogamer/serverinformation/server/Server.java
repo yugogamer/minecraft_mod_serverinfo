@@ -5,6 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import fr.yugogamer.serverinformation.server.handler.MinecraftHandler;
 import fr.yugogamer.serverinformation.server.handler.PlayerList;
+import fr.yugogamer.serverinformation.server.handler.SendMessage;
 import fr.yugogamer.serverinformation.server.handler.Status;
 import net.minecraft.server.MinecraftServer;
 
@@ -27,6 +28,7 @@ public class Server {
         }
         server.createContext("/status", new Status(this.minecraftServer));
         server.createContext("/playerlist", new PlayerList(this.minecraftServer));
+        server.createContext("/sendmessage", new SendMessage(this.minecraftServer));
         server.start();
     }
 }
