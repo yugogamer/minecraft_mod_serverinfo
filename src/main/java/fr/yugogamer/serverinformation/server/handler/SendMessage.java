@@ -27,6 +27,8 @@ public class SendMessage extends MinecraftHandler {
             List<ServerPlayerEntity> litPlayer;
             litPlayer = this.minecraftServer.func_241755_D_().getPlayers();
             String message = querys.get("username") + " : " + querys.get("message");
+            response.addProperty("status","error");
+            response.addProperty("playerGetMessage","user not found");
             for (ServerPlayerEntity playerEntity : litPlayer) {
                 if (querys.get("player") != null)
                 {
@@ -38,6 +40,8 @@ public class SendMessage extends MinecraftHandler {
                     }
                 }else
                 {
+                    response.addProperty("status","succes");
+                    response.addProperty("playerGetMessage",true);
                     playerEntity.sendMessage(new StringTextComponent(message), UUID.randomUUID());
                 }
             }
