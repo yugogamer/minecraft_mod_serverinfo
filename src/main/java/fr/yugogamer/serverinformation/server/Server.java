@@ -4,10 +4,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import fr.yugogamer.serverinformation.config.Config;
-import fr.yugogamer.serverinformation.server.handler.MinecraftHandler;
-import fr.yugogamer.serverinformation.server.handler.PlayerList;
-import fr.yugogamer.serverinformation.server.handler.SendMessage;
-import fr.yugogamer.serverinformation.server.handler.Status;
+import fr.yugogamer.serverinformation.server.handler.*;
 import fr.yugogamer.serverinformation.server.handler.admin.ExecuteCommande;
 import net.minecraft.server.MinecraftServer;
 
@@ -35,6 +32,8 @@ public class Server {
         server.createContext("/status", new Status(this.minecraftServer));
         server.createContext("/playerlist", new PlayerList(this.minecraftServer));
         server.createContext("/sendmessage", new SendMessage(this.minecraftServer));
+        server.createContext("/image", new GetServerImage(this.minecraftServer));
+        server.createContext("/admin", new AdminEnable(this.minecraftServer));
         if (Config.ADMIN_API.get())
         {
             server.createContext("/admin/execute", new ExecuteCommande(this.minecraftServer));
