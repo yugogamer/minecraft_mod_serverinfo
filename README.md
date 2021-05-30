@@ -59,4 +59,30 @@ query :
 | message  | The message tu send      |
 | player   | Username of the receiver |
 
-Return if the commande has worked
+Return information about the execution
+
+response :
+
+```json
+{
+  "status": "succes",
+  "playerGetMessage": true
+}
+```
+
+### ExecuteCommand
+
+/admin/execute
+
+header :
+
+| key     | value                  |
+| ------- | ---------------------- |
+| adminid | the id in the config   |
+| command | the command to execute |
+
+response :
+
+```json
+
+```
