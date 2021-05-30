@@ -26,7 +26,7 @@ public class ExecuteCommande extends ApiHandler {
             response.addProperty("status","error, id not matching");
         }else if (command != null)
         {
-            int result = this.minecraftServer.getCommandManager().handleCommand(Minecraft.getInstance().getIntegratedServer().getCommandSource(), command);
+            int result = this.minecraftServer.getCommandManager().handleCommand(this.minecraftServer.getCommandSource(), command);
             response.addProperty("status","Succes");
             response.addProperty("return_int",result);
         }
