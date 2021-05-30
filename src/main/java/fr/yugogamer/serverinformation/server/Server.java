@@ -8,6 +8,7 @@ import fr.yugogamer.serverinformation.server.handler.MinecraftHandler;
 import fr.yugogamer.serverinformation.server.handler.PlayerList;
 import fr.yugogamer.serverinformation.server.handler.SendMessage;
 import fr.yugogamer.serverinformation.server.handler.Status;
+import fr.yugogamer.serverinformation.server.handler.admin.ExecuteCommande;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.IOException;
@@ -34,6 +35,10 @@ public class Server {
         server.createContext("/status", new Status(this.minecraftServer));
         server.createContext("/playerlist", new PlayerList(this.minecraftServer));
         server.createContext("/sendmessage", new SendMessage(this.minecraftServer));
+        if (Config.ADMIN_API.get())
+        {
+            server.createContext("/admin/execute", new ExecuteCommande(this.minecraftServer));
+        }
         server.start();
     }
 }
