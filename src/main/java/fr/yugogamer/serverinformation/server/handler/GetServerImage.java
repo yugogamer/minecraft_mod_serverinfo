@@ -22,7 +22,15 @@ public class GetServerImage  extends MinecraftHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
-        File file = this.minecraftServer.getWorldIconFile();
+        File file = new File("server-icon.png");
+        System.out.println(file.getAbsoluteFile());
+        //File file = this.minecraftServer.getWorldIconFile();
+        if (file == null)
+        {
+            System.out.println(file.getAbsoluteFile());
+            file = new File("server-icon.png");
+            System.out.println(file.getAbsoluteFile());
+        }
 
         httpExchange.sendResponseHeaders(200, file.length());
         httpExchange.getResponseHeaders().add("Content-Type", "image/png");
