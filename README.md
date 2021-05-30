@@ -4,8 +4,6 @@
 
  A small API mod for minecraft server
 
-
-
 ## Road
 
 ### Status
@@ -48,3 +46,17 @@ response :
   "currentplayer": 1
 }
 ```
+
+### SendMessage
+
+/sendmessage
+
+query : 
+
+| query    | value                    |
+| -------- | ------------------------ |
+| username | The name of the sender   |
+| message  | The message tu send      |
+| player   | Username of the receiver |
+
+Return if the commande has worked
