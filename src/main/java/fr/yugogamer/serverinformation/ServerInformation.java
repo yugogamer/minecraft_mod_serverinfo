@@ -1,13 +1,18 @@
 package fr.yugogamer.serverinformation;
 
+import com.mojang.brigadier.CommandDispatcher;
+import fr.yugogamer.serverinformation.command.ServerIsOnline;
 import fr.yugogamer.serverinformation.config.Config;
+import fr.yugogamer.serverinformation.register.ServerRegister;
 import fr.yugogamer.serverinformation.server.Server;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.command.CommandSource;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -77,6 +82,11 @@ public class ServerInformation {
             {
                 event.getPlayer().sendMessage(new StringTextComponent("Warning, api server is offline"), event.getPlayer().getUniqueID());
             }
+        }
+
+        @SubscribeEvent
+        public static void onCommonSetupEvent(FMLCommonSetupEvent event) {
+            MinecraftForge.EVENT_BUS.register(ServerRegister.class);
         }
     }
 }
