@@ -24,20 +24,20 @@ public class Server {
         HttpServer server = null;
         try {
             server = HttpServer.create(new InetSocketAddress(this.port), 0);
+            server.createContext("/status", new Status(this.minecraftServer));
+            server.createContext("/playerlist", new PlayerList(this.minecraftServer));
+            server.createContext("/sendmessage", new SendMessage(this.minecraftServer));
+            server.createContext("/image", new GetServerImage(this.minecraftServer));
+            server.createContext("/admin", new AdminEnable(this.minecraftServer));
+            if (Config.ADMIN_API.get())
+            {
+                server.createContext("/admin/execute", new ExecuteCommande(this.minecraftServer));
+            }
+            server.start();
             System.out.println("HTTP server started");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("HTTP server error");
         }
-        server.createContext("/status", new Status(this.minecraftServer));
-        server.createContext("/playerlist", new PlayerList(this.minecraftServer));
-        server.createContext("/sendmessage", new SendMessage(this.minecraftServer));
-        server.createContext("/image", new GetServerImage(this.minecraftServer));
-        server.createContext("/admin", new AdminEnable(this.minecraftServer));
-        if (Config.ADMIN_API.get())
-        {
-            server.createContext("/admin/execute", new ExecuteCommande(this.minecraftServer));
-        }
-        server.start();
     }
 }
