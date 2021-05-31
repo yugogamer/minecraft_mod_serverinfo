@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 public class Server {
+    public static boolean isOnline = true;
     private MinecraftServer minecraftServer;
 
     private int port;
@@ -36,6 +37,7 @@ public class Server {
             server.start();
             System.out.println("HTTP server started");
         } catch (IOException e) {
+            isOnline = false;
             e.printStackTrace();
             System.out.println("HTTP server error");
         }

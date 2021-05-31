@@ -4,8 +4,12 @@ import fr.yugogamer.serverinformation.config.Config;
 import fr.yugogamer.serverinformation.server.Server;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -17,10 +21,12 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLPaths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -48,7 +54,10 @@ public class ServerInformation {
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
-        Server server = new Server(event.getServer());
+        if (Config.SERVER_ACTIVATE.get())
+        {
+            Server server = new Server(event.getServer());
+        }
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -59,6 +68,15 @@ public class ServerInformation {
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
             LOGGER.info("HELLO from Register Block");
+        }
+
+        @SubscribeEvent
+        public void playerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+            System.out.println("PlyerLoggedIn Event");
+            if(!Server.isOnline)
+            {
+                event.getPlayer().sendMessage(new StringTextComponent("Warning, api server is offline"), event.getPlayer().getUniqueID());
+            }
         }
     }
 }

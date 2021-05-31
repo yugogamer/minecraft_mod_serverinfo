@@ -12,6 +12,7 @@ import java.nio.file.Path;
 @Mod.EventBusSubscriber
 public class Config {
 
+    public static ForgeConfigSpec.BooleanValue SERVER_ACTIVATE;
     public static ForgeConfigSpec.IntValue SERVER_PORT;
     public static ForgeConfigSpec.ConfigValue ID_ADMIN;
     public static ForgeConfigSpec.BooleanValue ADMIN_API;
@@ -34,6 +35,7 @@ public class Config {
 
     private static void setupServerConfig() {
         COMMON_BUILDER.comment("Server configuration").push("server_configuration");
+        SERVER_ACTIVATE = COMMON_BUILDER.comment("API is active ").define("SERVER_ACTIVATE", true);
         SERVER_PORT = COMMON_BUILDER.comment("Server port")
                 .defineInRange("SERVER_PORT", 80, 0, Integer.MAX_VALUE);
         ID_ADMIN = COMMON_BUILDER.comment("Id for acces admin part of the api").define("ID_ADMIN", generateDefaultValue());
