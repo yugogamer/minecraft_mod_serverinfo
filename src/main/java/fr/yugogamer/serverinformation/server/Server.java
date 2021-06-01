@@ -11,12 +11,28 @@ import net.minecraft.server.MinecraftServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+/**
+ * Create server and set is configuration
+ */
 public class Server {
+    /**
+     * Define if server is online
+     */
     public static boolean isOnline = true;
+    /**
+     *Minecraft data access
+     */
     private MinecraftServer minecraftServer;
 
+    /**
+     * port of the server
+     */
     private int port;
 
+    /**
+     * Create the server
+     * @param minecraftServer this minecraft server object
+     */
     public Server(MinecraftServer minecraftServer) {
         this.minecraftServer = minecraftServer;
         this.port = Config.SERVER_PORT.get();
